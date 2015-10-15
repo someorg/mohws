@@ -1,0 +1,68 @@
+This is a web server written in Haskell, based on Simon Marlow's original
+Haskell Web Server. It has a module system and can run CGI programs. 
+
+The original program is described in:
+Developing a high-performance web server in Concurrent Haskell,
+Simon Marlow, 
+Journal of Functional Programming, 12(4+5):359--374, July 2002
+[http://www.haskell.org/~simonmar/papers/web-server-jfp.pdf]
+
+The original version available from:
+[http://cvs.haskell.org/cgi-bin/cvsweb.cgi/fptools/hws/]
+
+A more conservative update of the original HWS is available from:
+[http://darcs.haskell.org/hws/]
+
+
+=== Build ===
+
+You can use either Cabal or make to build HWS.
+
+==== With Cabal ====
+
+{{{pre:
+$ runghc Setup.hs configure
+$ runghc Setup.hs build
+}}}
+
+This produces the binary ``dist/build/hws/hws``.
+
+==== With make ====
+
+{{{pre:
+$ make
+}}}
+
+This produces the binary ``./hws``.
+
+
+=== Configure ===
+
+There is a config file example in ``conf/httpd.conf``. The server should run with the 
+example settings, but it would not be very usable. See the example file
+for more information about the configuration parameters.
+
+
+=== Run ===
+
+{{{pre:
+usage: hws [option...]
+  -f filename   --config=filename        default: "conf/httpd.conf"
+  -d directory  --server-root=directory  default: "."
+}}}
+
+The server root is the directory which hws uses as base for the
+configuration and log file paths.
+
+Files are served from the DocumentRoot.
+
+
+==== CGI ====
+
+Files which have the filename suffix ``.cgi`` are run as CGI programs.
+
+
+==== Debug ====
+
+Look in the error log file (``log/error.log`` by default) for any error messages.
+If this does not help, try setting LogLevel to debug (in the config file).
